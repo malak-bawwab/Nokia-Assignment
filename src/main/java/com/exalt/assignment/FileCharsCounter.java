@@ -12,11 +12,11 @@ import java.util.Map;
  *
  * @author Malak
  */
-public class FileCharsCount implements Runnable {
+public class FileCharsCounter implements Runnable {
     private final String filePath;
     private final Map<Character, Long> allCharsCountMap;
 
-    public FileCharsCount(String filePath, Map<Character, Long> allCharsCountMap) {
+    public FileCharsCounter(String filePath, Map<Character, Long> allCharsCountMap) {
         this.filePath = filePath;
         this.allCharsCountMap = allCharsCountMap;
     }

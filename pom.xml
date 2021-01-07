@@ -37,12 +37,11 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.exalt.assignment.CharsCount</mainClass>
+                            <mainClass>com.exalt.assignment.CharsCounterMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

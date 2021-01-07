@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Malak
  */
-public class CharsCount {
+public class CharsCounterMain {
     private static final String INCORRECT_DIRECTORY_PATH_MESSAGE = "Please provide a correct directory path";
     private static final Map<Character, Long> allCharsCountMap = new HashMap<>();
     private static Set<String> allFilesPathSet = new HashSet<>();
@@ -36,7 +36,7 @@ public class CharsCount {
         }
 
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        listFiles(file).forEach(filePath -> executorService.execute(new FileCharsCount(filePath, allCharsCountMap)));
+        listFiles(file).forEach(filePath -> executorService.execute(new FileCharsCounter(filePath, allCharsCountMap)));
 
         executorService.shutdown();
         executorService.awaitTermination(1, TimeUnit.HOURS);
