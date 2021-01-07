@@ -3,12 +3,10 @@ package com.exalt.assignment;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.HashMap;
 
-
 /**
- * Runnable class that iterates over file content line by line
+ * Runnable class that iterates over file content char by char
  * and count the number of occurrences of lower-case characters.
  *
  * @author Malak
@@ -27,15 +25,11 @@ public class FileCharsCount implements Runnable {
         HashMap<Character, Long> charsCountMap = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                char[] characters = line.toCharArray();
-                for (char c : characters) {
-                    Character character = c;
-                    if (character >= 'a' && character <= 'z') {
-                        Long value = charsCountMap.get(character);
-                        charsCountMap.put(character, value == null ? 1 : value + 1);
-                    }
+            int character;
+            while ((character = br.read()) != -1) {
+                if (character >= 'a' && character <= 'z') {
+                    Long value = charsCountMap.get((char) character);
+                    charsCountMap.put((char) character, value == null ? 1 : value + 1);
                 }
             }
             synchronized (allCharsCountMap) {

@@ -60,7 +60,7 @@
     <property name="sun.stdout.encoding" value="cp437"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.exalt.assignment.CharsCountTest" name="testInvalidFolderPath" time="0.009"/>
-  <testcase classname="com.exalt.assignment.CharsCountTest" name="testIgnoringCountNonLatinChars" time="0.031"/>
-  <testcase classname="com.exalt.assignment.CharsCountTest" name="testCountLowerCaseChars" time="0.01"/>
+  <testcase classname="com.exalt.assignment.CharsCountTest" name="testInvalidFolderPath" time="0.007"/>
+  <testcase classname="com.exalt.assignment.CharsCountTest" name="testIgnoringCountNonLatinChars" time="0.026"/>
+  <testcase classname="com.exalt.assignment.CharsCountTest" name="testCountLowerCaseChars" time="0.017"/>
 </testsuite>

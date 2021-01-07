@@ -8,7 +8,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-
 /**
  * This is a main class that reads all files in a directory provided as a command line argument
  * and count the occurrences of lower-case latin characters [a-z] and print them in console.
