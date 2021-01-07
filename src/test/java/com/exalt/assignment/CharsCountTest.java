@@ -13,9 +13,6 @@ public class CharsCountTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private ClassLoader loader = CharsCountTest.class.getClassLoader();
 
-    @Rule
-    public TemporaryFolder tempFolder = new TemporaryFolder();
-
     /**
      * This setup reassign the standard output stream.
      */
@@ -25,7 +22,7 @@ public class CharsCountTest {
     }
 
     /**
-     * This test verify the occurrences of lower-case latin chars in latin folder(in resources)
+     * This test verifies the occurrences of lower-case latin chars in latin folder(in resources)
      * by comparing the actual,expected console output,latin folder contains 5 testcase
      * files and 2 subfolder(one of them has another subfolder inside it). Each subfolder
      * also contains 5 testcase files.The content of each testcase file is a string "abcd"
@@ -52,10 +49,10 @@ public class CharsCountTest {
     }
 
     /**
-     * This test verify the occurrences of Non_latin chars in the non_latin folder by comparing the actual,expected condole output ,
-     * non_latin folder contains 5 testcase files and 2 subfolder(one of them has another subfolder inside it).
-     * each subfolder also contain 5 testcase files.
-     * The content of testcase file is non-latin characters written across multiple lines.
+     * This test verifies the occurrences of Non_latin chars in the non_latin folder(in resources)
+     * by comparing the actual, expected condole output, non_latin folder contains 5 testcase files
+     * and 2 subfolder(one of them has another subfolder inside it).Each subfolder also contain 5
+     * testcase files.The content of testcase file is non-latin characters written across multiple lines.
      *
      * @throws Exception
      */
@@ -70,6 +67,18 @@ public class CharsCountTest {
             expectedOutput.append(character).append("\t \t").append("0").append("\n");
         }
         Assert.assertEquals(expectedOutput.toString(), outContent.toString());
+    }
+
+    /**
+     * This test verifies that if a folder path is not passed
+     * then unchecked exception is thrown.
+     *
+     * @throws Exception
+     */
+    @Test(expected = RuntimeException.class)
+    public void testInvalidFolderPath() throws Exception {
+        String[] arguments = {loader.getResource("/fake").getPath()};
+        CharsCount.main(arguments);
     }
 
     @After

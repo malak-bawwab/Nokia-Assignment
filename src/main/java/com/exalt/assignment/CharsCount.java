@@ -22,7 +22,7 @@ public class CharsCount {
         //Exit application if no directory path is passed.
         if (args.length == 0) {
             System.err.print(INCORRECT_DIRECTORY_PATH_MESSAGE);
-            System.exit(0);
+            throw new RuntimeException(INCORRECT_DIRECTORY_PATH_MESSAGE);
         }
 
         File file = new File(args[0]);
@@ -30,7 +30,7 @@ public class CharsCount {
         //Exit application if the provided argument is a file path not directory.
         if (file == null || file.isFile()) {
             System.err.print(INCORRECT_DIRECTORY_PATH_MESSAGE);
-            System.exit(0);
+            throw new RuntimeException(INCORRECT_DIRECTORY_PATH_MESSAGE);
         }
 
         executorService = Executors.newFixedThreadPool(10);
