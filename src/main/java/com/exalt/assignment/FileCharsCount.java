@@ -32,7 +32,7 @@ public class FileCharsCount implements Runnable {
                     charsCountMap.put((char) character, value == null ? 1 : value + 1);
                 }
             }
-           synchronized (allCharsCountMap) {
+            synchronized (allCharsCountMap) {
                 charsCountMap.keySet().forEach(key -> {
                     Long valueAll = allCharsCountMap.get(key);
                     Long value = charsCountMap.get(key);

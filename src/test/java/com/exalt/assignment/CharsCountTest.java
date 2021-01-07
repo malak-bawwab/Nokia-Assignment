@@ -1,7 +1,6 @@
 package com.exalt.assignment;
 
 import org.junit.*;
-import org.junit.rules.TemporaryFolder;
 
 import java.io.*;
 
