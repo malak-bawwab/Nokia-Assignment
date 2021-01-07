@@ -18,7 +18,8 @@ import java.util.concurrent.TimeUnit;
 public class CharsCounterMain {
     private static final String INCORRECT_DIRECTORY_PATH_MESSAGE = "Please provide a correct directory path";
     private static final Map<Character, Long> allCharsCountMap = new HashMap<>();
-    private static final Set<String> allFilesPathSet = new HashSet<>();
+
+    private static ExecutorService executorService;
 
     public static void main(String[] args) throws Exception {
         //Throw unchecked exception if no directory path is passed.
@@ -35,8 +36,8 @@ public class CharsCounterMain {
             throw new RuntimeException(INCORRECT_DIRECTORY_PATH_MESSAGE);
         }
 
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
-        listFiles(file).forEach(filePath -> executorService.execute(new FileCharsCounter(filePath, allCharsCountMap)));
+        executorService = Executors.newFixedThreadPool(10);
+        listFiles(file);
 
         executorService.shutdown();
         executorService.awaitTermination(1, TimeUnit.HOURS);
@@ -50,17 +51,17 @@ public class CharsCounterMain {
      * @param directory base or sub-directory
      * @return all directory file paths.
      */
-    private static Set<String> listFiles(File directory) {
+    private static void listFiles(File directory) {
         if (directory != null) {
             for (File fileEntry : directory.listFiles()) {
                 if (fileEntry.isDirectory()) {
                     listFiles(fileEntry);
                 } else {
-                    allFilesPathSet.add(fileEntry.getAbsolutePath());
+                    executorService.execute(new FileCharsCounter(fileEntry.getAbsolutePath(), allCharsCountMap));
                 }
             }
         }
-        return allFilesPathSet;
+
     }
 
     /**
