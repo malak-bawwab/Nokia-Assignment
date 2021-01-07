@@ -56,7 +56,6 @@ public class CharsCount {
                 if (fileEntry.isDirectory()) {
                     listFiles(fileEntry);
                 } else {
-
                     allFilesPathSet.add(fileEntry.getAbsolutePath());
                 }
             }
