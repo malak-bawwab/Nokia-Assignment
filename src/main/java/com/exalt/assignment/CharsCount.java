@@ -34,10 +34,8 @@ public class CharsCount {
             throw new RuntimeException(INCORRECT_DIRECTORY_PATH_MESSAGE);
         }
 
-        ExecutorService executorService;
-        executorService = Executors.newFixedThreadPool(10);
-        listFiles(file).forEach(filePath -> executorService.execute(new FileCharsCount(filePath, allCharsCountMap))
-        );
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        listFiles(file).forEach(filePath -> executorService.execute(new FileCharsCount(filePath, allCharsCountMap)));
 
         executorService.shutdown();
         executorService.awaitTermination(1, TimeUnit.HOURS);
