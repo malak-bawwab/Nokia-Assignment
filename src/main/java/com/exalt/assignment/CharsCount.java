@@ -3,6 +3,7 @@ package com.exalt.assignment;
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CharsCount {
     private static final String INCORRECT_DIRECTORY_PATH_MESSAGE = "Please provide a correct directory path";
-    private static final HashMap<Character, Long> allCharsCountMap = new HashMap<>();
+    private static final Map<Character, Long> allCharsCountMap = new HashMap<>();
     private static Set<String> allFilesPathSet = new HashSet<>();
 
     public static void main(String[] args) throws Exception {

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Runnable class that iterates over file content char by char
@@ -13,16 +14,16 @@ import java.util.HashMap;
  */
 public class FileCharsCount implements Runnable {
     private final String filePath;
-    private final HashMap<Character, Long> allCharsCountMap;
+    private final Map<Character, Long> allCharsCountMap;
 
-    public FileCharsCount(String filePath, HashMap<Character, Long> allCharsCountMap) {
+    public FileCharsCount(String filePath, Map<Character, Long> allCharsCountMap) {
         this.filePath = filePath;
         this.allCharsCountMap = allCharsCountMap;
     }
 
     @Override
     public void run() {
-        HashMap<Character, Long> charsCountMap = new HashMap<>();
+        Map<Character, Long> charsCountMap = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             int character;
