@@ -2,6 +2,8 @@ package com.exalt.assignment;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class CharsCount {
     private static final String INCORRECT_DIRECTORY_PATH_MESSAGE = "Please provide a correct directory path";
     private static final HashMap<Character, Long> allCharsCountMap = new HashMap<>();
-    private static ExecutorService executorService;
+    private static Set<String> allFilesPathSet = new HashSet<>();
 
     public static void main(String[] args) throws Exception {
         //Exit application if no directory path is passed.
@@ -33,8 +35,10 @@ public class CharsCount {
             throw new RuntimeException(INCORRECT_DIRECTORY_PATH_MESSAGE);
         }
 
+        ExecutorService executorService;
         executorService = Executors.newFixedThreadPool(10);
-        listFiles(file);
+        listFiles(file).forEach(filePath -> executorService.execute(new FileCharsCount(filePath, allCharsCountMap))
+        );
 
         executorService.shutdown();
         executorService.awaitTermination(1, TimeUnit.HOURS);
@@ -47,17 +51,19 @@ public class CharsCount {
      * to count chars occurrences.
      *
      * @param directory base or sub-directory
+     * @return all directory file paths.
      */
-    private static void listFiles(File directory) {
+    private static Set<String> listFiles(File directory) {
         if (directory != null) {
             for (File fileEntry : directory.listFiles()) {
                 if (fileEntry.isDirectory()) {
                     listFiles(fileEntry);
                 } else {
-                    executorService.execute(new FileCharsCount(fileEntry.getAbsolutePath(), allCharsCountMap));
+                    allFilesPathSet.add(fileEntry.getAbsolutePath());
                 }
             }
         }
+        return allFilesPathSet;
     }
 
     /**
