@@ -20,7 +20,7 @@ public class CharsCounterTest {
         System.setOut(new PrintStream(outContent));
     }
 
-    /**3
+    /**
      * This test verifies the occurrences of lower-case latin chars in latin folder(in resources)
      * by comparing the actual,expected console output,latin folder contains 5 testcase
      * files and 2 subfolder(one of them has another subfolder inside it). Each subfolder
